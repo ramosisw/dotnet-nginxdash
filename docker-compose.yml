@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  nginx_dash:
+    image: nginx_dash
+    container_name: nginx_dash
+    build:
+      context: .
+      dockerfile: NginxDash/Dockerfile
+    restart: on-failure
+    ports:
+      - "5001:80"
