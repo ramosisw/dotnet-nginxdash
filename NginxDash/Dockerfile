@@ -8,6 +8,10 @@ COPY NginxDash/NginxDash.csproj NginxDash/
 RUN dotnet restore NginxDash/NginxDash.csproj
 COPY . .
 
+## Get nodejs to build frontend ReactJs
+RUN curl -sL https://deb.nodesource.com/setup_10.x |  bash -
+RUN apt-get install -y nodejs
+
 WORKDIR /src/NginxDash
 RUN dotnet build NginxDash.csproj -c Release -o /app
 
