@@ -1,9 +1,20 @@
 version: '3.4'
 
 services:
-  nginx_dash:
-    image: nginx_dash
-    container_name: nginx_dash
+  nginx:
+    image: docker-registry.wayproyect.com/nginx:amd64
+    container_name: wayproyect_nginx
+    volumes:
+      - ~/docker_volumes/wayproyect.com/nginx/conf.d:/etc/nginx/conf.d
+      #- ~/docker_volumes/wayproyect.com/nginx/ssh:/etc/ssh/ssh_host_key
+    restart: always
+    ports:
+      - '5080:80'
+      - '5443:80'
+      - '5022:22'
+  nginxdash:
+    image: docker-registry.wayproyect.com/nginxdash
+    container_name: wayproyect_nginxdash
     build:
       context: .
       dockerfile: NginxDash/Dockerfile
