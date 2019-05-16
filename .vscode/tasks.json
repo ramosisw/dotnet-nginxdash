@@ -12,6 +12,19 @@
             "problemMatcher": "$tsc"
         },
         {
+            "label": "build ClientApp",
+            "command": "npm",
+            "type": "shell",
+            "args": [
+                "run",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/NginxDash/ClientApp"
+            },
+            "problemMatcher": "$tsc"
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",
@@ -31,6 +44,13 @@
                 "${workspaceFolder}/NginxDash/NginxDash.csproj"
             ],
             "problemMatcher": "$tsc"
+        },
+        {
+            "label": "run ClientApp",
+            "type": "npm",
+            "script": "start",
+            "path": "NginxDash/ClientApp/",
+            "problemMatcher": []
         }
     ]
 }

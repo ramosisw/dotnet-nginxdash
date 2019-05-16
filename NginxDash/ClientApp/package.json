@@ -1,14 +1,22 @@
 {
-  "name": "NginxDash",
+  "name": "nginx-dash",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "typeface-roboto": "0.0.54",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-redux": "^7.0.3",
     "react-scripts": "3.0.0",
-    "typeface-roboto": "0.0.54"
+    "redux-thunk": "^2.3.0",
+    "history": "^4.7.2",
+    "query-string": "^6.5.0"
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
