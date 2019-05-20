@@ -16,3 +16,12 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration) $(projectPath)
   displayName: 'dotnet build $(buildConfiguration)'
+- script: |
+    dotnet tool install --global dotnet-reportgenerator-globaltool
+    dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude=[xunit*]* --logger trx
+  displayName: 'dotnet tests'
+- task: PublishTestResults@2
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
+  displayName: 'publish tests'

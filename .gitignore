@@ -5,6 +5,7 @@
 
 # User-specific files
 **/ssh/*
+**/[Tt]est[Rr]esults/*
 *.suo
 *.user
 *.userosscache

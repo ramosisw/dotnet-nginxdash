@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/NginxDash/NginxDash.csproj"
+                "${workspaceFolder}/src/NginxDash/NginxDash.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -20,7 +20,7 @@
                 "build"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/NginxDash/ClientApp"
+                "cwd": "${workspaceFolder}/src/NginxDash/ClientApp"
             },
             "problemMatcher": "$tsc"
         },
@@ -44,13 +44,6 @@
                 "${workspaceFolder}/NginxDash/NginxDash.csproj"
             ],
             "problemMatcher": "$tsc"
-        },
-        {
-            "label": "run ClientApp",
-            "type": "npm",
-            "script": "start",
-            "path": "NginxDash/ClientApp/",
-            "problemMatcher": []
         }
     ]
 }

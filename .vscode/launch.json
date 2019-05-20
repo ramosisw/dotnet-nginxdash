@@ -20,9 +20,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/NginxDash/bin/Debug/netcoreapp2.2/NginxDash.dll",
+            "program": "${workspaceFolder}/src/NginxDash/bin/Debug/netcoreapp2.2/NginxDash.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/NginxDash",
+            "cwd": "${workspaceFolder}/src/NginxDash",
             "stopAtEntry": false,
             "launchBrowser": {
                 "enabled": false
