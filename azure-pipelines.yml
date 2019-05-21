@@ -17,11 +17,17 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) $(projectPath)
   displayName: 'dotnet build $(buildConfiguration)'
 - script: |
-    dotnet tool install --global dotnet-reportgenerator-globaltool
-    dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude=[xunit*]* --logger trx
+    # dotnet tool install --global dotnet-reportgenerator-globaltool
+    dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults\Coverage\ /p:Exclude=[xunit*]* --logger "trx;LogFileName=TestResults.trx" --logger "xunit;LogFileName=TestResults.xml" 
+    dotnet reportgenerator "-reports:TestResults\Coverage\coverage.cobertura.xml" "-targetdir:TestResults\Coverage" -reporttypes:HTML;HTMLSummary
   displayName: 'dotnet tests'
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
     testResultsFiles: '**/*.trx'
   displayName: 'publish tests'
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: '**/TestResults/coverage.cobertura.xml'
+  displayName: 'publish coverage'
