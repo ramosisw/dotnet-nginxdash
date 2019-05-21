@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
+﻿using NginxDashCommon.Models.Domain;
 using Microsoft.AspNetCore.Mvc;
-using NginxDash.Models;
-using NginxDashCommon.Models.Domain;
 using NginxDashCommon.Services;
+using System.Threading.Tasks;
+using NginxDash.Models;
 
 namespace NginxDash.Controllers
 {

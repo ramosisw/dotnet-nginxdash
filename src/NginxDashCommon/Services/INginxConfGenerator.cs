@@ -1,4 +1,4 @@
-using NginxDashCore.Data.Entities;
+﻿using NginxDashCore.Data.Entities;
 
 namespace NginxDashCommon.Services
 {

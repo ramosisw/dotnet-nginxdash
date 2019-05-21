@@ -1,7 +1,7 @@
-using System;
-using System.Threading.Tasks;
+﻿using NginxDashCommon.Models.Subdomain;
 using NginxDashCommon.Models.Domain;
-using NginxDashCommon.Models.Subdomain;
+using System.Threading.Tasks;
+using System;
 
 namespace NginxDashCommon.Services
 {

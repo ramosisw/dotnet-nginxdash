@@ -1,6 +1,8 @@
-using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using NginxDashCore.Enum;
+using System;
+using System.Collections.Generic;
 
 namespace NginxDashCore.Data.Entities
 {
@@ -11,15 +13,18 @@ namespace NginxDashCore.Data.Entities
         [StringLength(36)]
         public Guid Id { get; set; }
 
-        [StringLength(2)]
-        public string Modifier { get; set; }
+        public LocationModifier Modifier { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string Match { get; set; }
 
-        [Column(TypeName = "json")]
-        public string Settings { get; set; }
+        public ICollection<LocationSetting> Settings { get; set; }
 
-        
+        public Location()
+        {
+            Settings = new List<LocationSetting>();
+        }
+
     }
 }

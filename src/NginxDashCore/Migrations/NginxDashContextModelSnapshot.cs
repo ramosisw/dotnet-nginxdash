@@ -21,20 +21,20 @@ namespace NginxDashCore.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Conf")
-                        .HasColumnType("text");
-
                     b.Property<string>("ConfMd5Sum")
                         .HasMaxLength(32);
 
+                    b.Property<bool>("ForceHttps");
+
                     b.Property<bool>("IsEnabled");
+
+                    b.Property<string>("LastConf")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name");
 
                     b.Property<string>("TestConf")
                         .HasColumnType("text");
-
-                    b.Property<bool>("UseHttps");
 
                     b.HasKey("Id");
 
@@ -47,20 +47,17 @@ namespace NginxDashCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36);
 
-                    b.Property<string>("Conf")
-                        .HasColumnType("text");
-
                     b.Property<string>("ConfMd5Sum")
                         .HasMaxLength(32);
 
+                    b.Property<string>("LastConf")
+                        .HasColumnType("text");
+
                     b.Property<string>("Match")
+                        .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("Modifier")
-                        .HasMaxLength(2);
-
-                    b.Property<string>("Settings")
-                        .HasColumnType("json");
+                    b.Property<int>("Modifier");
 
                     b.Property<Guid?>("SubdomainId");
 
@@ -74,18 +71,40 @@ namespace NginxDashCore.Migrations
                     b.ToTable("Location");
                 });
 
+            modelBuilder.Entity("NginxDashCore.Data.Entities.LocationSetting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Directive");
+
+                    b.Property<Guid?>("LocationId");
+
+                    b.Property<string>("value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("LocationSetting");
+                });
+
             modelBuilder.Entity("NginxDashCore.Data.Entities.Subdomain", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Conf")
-                        .HasColumnType("text");
-
                     b.Property<string>("ConfMd5Sum")
                         .HasMaxLength(32);
 
                     b.Property<Guid?>("DomainId");
+
+                    b.Property<bool>("ForceHttps");
+
+                    b.Property<bool>("IsDomainRoot");
+
+                    b.Property<string>("LastConf")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name");
 
@@ -104,6 +123,13 @@ namespace NginxDashCore.Migrations
                     b.HasOne("NginxDashCore.Data.Entities.Subdomain")
                         .WithMany("Locations")
                         .HasForeignKey("SubdomainId");
+                });
+
+            modelBuilder.Entity("NginxDashCore.Data.Entities.LocationSetting", b =>
+                {
+                    b.HasOne("NginxDashCore.Data.Entities.Location")
+                        .WithMany("Settings")
+                        .HasForeignKey("LocationId");
                 });
 
             modelBuilder.Entity("NginxDashCore.Data.Entities.Subdomain", b =>

@@ -1,9 +1,9 @@
-using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using NginxDashCore.Data;
 using StructureMap;
+using System;
 
 namespace NginxDashCommon.Extensions.DependencyInjection
 {

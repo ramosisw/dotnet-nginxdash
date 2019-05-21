@@ -1,6 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace NginxDashCore.Data.Repository
 {

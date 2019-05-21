@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NginxDashCore.Data.Entities;
 
 namespace NginxDashCore.Data

@@ -1,16 +1,16 @@
-using System;
+﻿using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using NginxDashCommon.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using NginxDashCommon.Extensions.DependencyInjection;
 using NginxDashCore.Data;
-using Swashbuckle.AspNetCore.Swagger;
+using Newtonsoft.Json;
+using System;
 
 namespace src
 {

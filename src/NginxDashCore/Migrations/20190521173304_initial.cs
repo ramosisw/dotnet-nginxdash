@@ -12,12 +12,12 @@ namespace NginxDashCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Conf = table.Column<string>(type: "text", nullable: true),
+                    LastConf = table.Column<string>(type: "text", nullable: true),
                     ConfMd5Sum = table.Column<string>(maxLength: 32, nullable: true),
                     TestConf = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(nullable: true),
                     IsEnabled = table.Column<bool>(nullable: false),
-                    UseHttps = table.Column<bool>(nullable: false)
+                    ForceHttps = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,10 +29,12 @@ namespace NginxDashCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Conf = table.Column<string>(type: "text", nullable: true),
+                    LastConf = table.Column<string>(type: "text", nullable: true),
                     ConfMd5Sum = table.Column<string>(maxLength: 32, nullable: true),
                     TestConf = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    IsDomainRoot = table.Column<bool>(nullable: false),
+                    ForceHttps = table.Column<bool>(nullable: false),
                     DomainId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -51,12 +53,11 @@ namespace NginxDashCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(maxLength: 36, nullable: false),
-                    Conf = table.Column<string>(type: "text", nullable: true),
+                    LastConf = table.Column<string>(type: "text", nullable: true),
                     ConfMd5Sum = table.Column<string>(maxLength: 32, nullable: true),
                     TestConf = table.Column<string>(type: "text", nullable: true),
-                    Modifier = table.Column<string>(maxLength: 2, nullable: true),
-                    Match = table.Column<string>(maxLength: 100, nullable: true),
-                    Settings = table.Column<string>(type: "json", nullable: true),
+                    Modifier = table.Column<int>(nullable: false),
+                    Match = table.Column<string>(maxLength: 100, nullable: false),
                     SubdomainId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -70,10 +71,35 @@ namespace NginxDashCore.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LocationSetting",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Directive = table.Column<int>(nullable: false),
+                    value = table.Column<string>(nullable: true),
+                    LocationId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LocationSetting", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LocationSetting_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Location_SubdomainId",
                 table: "Location",
                 column: "SubdomainId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LocationSetting_LocationId",
+                table: "LocationSetting",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Subdomains_DomainId",
@@ -83,6 +109,9 @@ namespace NginxDashCore.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "LocationSetting");
+
             migrationBuilder.DropTable(
                 name: "Location");
 

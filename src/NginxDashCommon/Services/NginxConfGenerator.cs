@@ -1,6 +1,8 @@
+﻿using NginxDashCore.Data.Entities;
 using System.Collections.Generic;
+using NginxDashCore.Extensions;
+using NginxDashCore.Enum;
 using System.Linq;
-using NginxDashCore.Data.Entities;
 
 namespace NginxDashCommon.Services
 {
@@ -30,8 +32,11 @@ namespace NginxDashCommon.Services
         public string GenerateLocation(Location location)
         {
             var lines = new List<string>();
-            lines.Add($"location {location.Modifier} {location.Match} {{");
-
+            lines.Add($"location {location.Modifier.GetModifier()} {location.Match} {{");
+            foreach (var setting in location.Settings)
+            {
+                lines.Add($"\t{setting.Directive.GetDirective()} {setting.Value};");
+            }
             lines.Add("}\r");
             return string.Join("\r", lines.Select(x => $"\t{x}"));
         }

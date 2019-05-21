@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NginxDashCommon.Services;
 using NginxDashCore.Data.Entities;
+using NginxDashCore.Enum;
 using Xunit;
 
 namespace NginxDashcommon.Tests.Services
@@ -43,8 +44,50 @@ namespace NginxDashcommon.Tests.Services
             var expected = "\tlocation  / {\r\t}\r";
             var actual = service.GenerateLocation(new Location
             {
-                Modifier = "",
+                Modifier = LocationModifier.PREFIX,
                 Match = "/"
+            });
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        void GenerateLocation_WithSetting()
+        {
+            var expected = "\tlocation  / {\r\t\tproxy_pass http://192.168.1.1:500;\r\t}\r";
+            var actual = service.GenerateLocation(new Location
+            {
+                Modifier = LocationModifier.PREFIX,
+                Match = "/",
+                Settings = new List<LocationSetting> {
+                    new LocationSetting {
+                        Directive = NginxDirective.PROXY_PASS,
+                        Value = "http://192.168.1.1:500"
+                    }
+                }
+            });
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        void GenerateLocation_WithSettings()
+        {
+            var expected = "\tlocation  / {\r\t\tproxy_pass http://192.168.1.1:500;\r\t\tproxy_set_header X-Real-IP $host;\r\t}\r";
+            var actual = service.GenerateLocation(new Location
+            {
+                Modifier = LocationModifier.PREFIX,
+                Match = "/",
+                Settings = new List<LocationSetting> {
+                    new LocationSetting {
+                        Directive = NginxDirective.PROXY_PASS,
+                        Value = "http://192.168.1.1:500"
+                    },
+                    new LocationSetting {
+                        Directive = NginxDirective.PROXY_SET_HEADER,
+                        Value = "X-Real-IP $host"
+                    }
+                }
             });
 
             Assert.Equal(expected, actual);
