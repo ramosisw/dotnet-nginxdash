@@ -5,7 +5,7 @@ using NginxDashCore.Data.Entities;
 using NginxDashCore.Enum;
 using Xunit;
 
-namespace NginxDashcommon.Tests.Services
+namespace NginxDash.Tests.NginxDashcommon.Services
 {
     public class NginxConfGeneratorTests
     {

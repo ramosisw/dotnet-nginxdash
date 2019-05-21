@@ -1,5 +1,5 @@
 ﻿
-namespace NginxDashcommon.Tests.Services 
+namespace NginxDash.Tests.NginxDashcommon.Services 
 {
 	public class NginxTests
 	{
