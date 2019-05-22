@@ -10,12 +10,13 @@ namespace NginxDashCore.Extensions
             var attr = modifier.GetType()
                     .GetField(modifier.ToString())
                     .GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var description = "";
             if (attr.Length > 0)
             {
                 var Description = attr[0] as DescriptionAttribute;
-                return Description.Description;
+                description = Description.Description;
             }
-            return "";
+            return description;
         }
 
         public static string GetModifier(this LocationModifier modifier)

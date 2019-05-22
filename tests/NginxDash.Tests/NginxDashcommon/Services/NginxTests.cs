@@ -1,19 +1,22 @@
 ﻿
-namespace NginxDash.Tests.NginxDashcommon.Services 
+using Xunit;
+
+namespace NginxDash.Tests.NginxDashcommon.Services
 {
-	public class NginxTests
-	{
-		void SetupDomainAsync()
-		{
-		}
+    public class NginxTests
+    {
+        [Fact]
+        void SetupDomainAsync()
+        {
+        }
 
-		void TestConfig()
-		{
-		}
+        void TestConfig()
+        {
+        }
 
-		void SetupSubdomainAsync()
-		{
-		}
+        void SetupSubdomainAsync()
+        {
+        }
 
-	}
+    }
 }

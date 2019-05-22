@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NginxDashCore.Enum;
-using System;
 
-namespace NginxDashCore.Data.Entities
+namespace NginxDashCommon.Models.Location
 {
-    public class LocationSetting
+    public class LocationSettingModel
     {
-        public Guid Id { get; set; }
-
         [Required]
         public NginxDirective Directive { get; set; }
 

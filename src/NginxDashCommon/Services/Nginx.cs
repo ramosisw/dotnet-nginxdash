@@ -1,7 +1,9 @@
 ﻿using NginxDashCommon.Models.Subdomain;
+using NginxDashCommon.Models.Location;
 using Microsoft.EntityFrameworkCore;
 using NginxDashCommon.Models.Domain;
 using NginxDashCore.Data.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NginxDashCore.Data.Uow;
 using NginxDashCore.Data;
@@ -45,10 +47,21 @@ namespace NginxDashCommon.Services
             var domainName = (await _uow.DomainsRepository.Entities.FirstOrDefaultAsync(x => x.Id == domainId))?.Name;
             var domainDirPath = $"{_ngixRootRoute}/{domainName}";
             Directory.CreateDirectory(domainDirPath);
-
             var subdomain = new Subdomain
             {
-                Name = subdomainModel.Name
+                Name = subdomainModel.Name,
+                ForceHttps = subdomainModel.ForceHttps,
+                IsDomainRoot = subdomainModel.IsDomainRoot,
+                Locations = subdomainModel.Locations.Select(l => new Location
+                {
+                    Match = l.Match,
+                    Modifier = l.Modifier,
+                    Settings = l.Settings.Select(s => new LocationSetting
+                    {
+                        Directive = s.Directive,
+                        Value = s.Value
+                    }).ToList()
+                }).ToList()
             };
 
             using (var file = File.Create($"{domainDirPath}/{subdomain.Name}.conf"))
